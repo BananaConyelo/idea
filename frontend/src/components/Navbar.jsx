@@ -29,7 +29,7 @@ export default function Navbar({ searchQuery, setSearchQuery }) {
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-        <Link to="/" className="navbar__logo"> IdeasValidator </Link>
+        <Link to="/" className="navbar__logo"> IdeaValidator </Link>
 
         {setSearchQuery !== undefined && (
           <div className="navbar__search">
