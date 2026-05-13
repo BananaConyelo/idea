@@ -107,7 +107,7 @@ export default function SubmitIdeaPage() {
 
             <div style={{ display: 'flex', gap: '12px' }}>
               <button id="submit-idea-final" type="submit" className="btn btn-primary" disabled={loading} style={{ flex: 1 }}>
-                {loading ? 'Submitting...' : '🚀 Submit Idea'}
+                {loading ? 'Submitting...' : <><Lightbulb size={16} className="inline-block mr-1" /> Submit Idea</>}
               </button>
               <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Cancel</button>
             </div>

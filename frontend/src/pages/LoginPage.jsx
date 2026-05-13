@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Lightbulb } from 'lucide-react';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -27,7 +28,7 @@ export default function LoginPage() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-card__logo">
-          <div className="auth-card__logo-icon">🚀</div>
+          <div className="auth-card__logo-icon"><Lightbulb size={24} /></div>
           <h1>Welcome back</h1>
           <p>Sign in to your IdeaValidator account</p>
         </div>

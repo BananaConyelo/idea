@@ -75,7 +75,7 @@ export default function DashboardPage() {
               { label: 'Total Users', value: stats.total_users, icon: '👥', color: 'var(--success)' },
               { label: 'Total Votes', value: stats.total_votes, icon: '👍', color: 'var(--warning)' },
               { label: 'Total Comments', value: stats.total_comments, icon: '💬', color: 'var(--info)' },
-              { label: 'My Ideas', value: myIdeas.length, icon: '🚀', color: '#a78bfa' },
+              { label: 'My Ideas', value: myIdeas.length, icon: '�', color: '#a78bfa' },
               { label: 'My Total Votes', value: myIdeas.reduce((a, i) => a + i.upvote_count, 0), icon: '⭐', color: '#f472b6' },
             ].map(s => (
               <div key={s.label} className="chart-container" style={{ padding: '20px' }}>
