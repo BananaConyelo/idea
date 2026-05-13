@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ThumbsUp, ThumbsDown, Eye, MessageCircle, Lock } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Eye, MessageCircle, Lock, Sparkles } from 'lucide-react';
 
 const CATEGORY_COLORS = {
   tech: '#6366f1', health: '#10b981', finance: '#f59e0b',

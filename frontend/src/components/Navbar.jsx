@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
-import { Search, Bell, PlusCircle, LogOut, User, BarChart2, Menu, X } from 'lucide-react';
+import { Search, Bell, PlusCircle, LogOut, User, BarChart2, Menu, X, Lightbulb } from 'lucide-react';
 import api from '../api';
 
 export default function Navbar({ searchQuery, setSearchQuery }) {
@@ -29,7 +29,9 @@ export default function Navbar({ searchQuery, setSearchQuery }) {
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-        <Link to="/" className="navbar__logo"> IdeaValidator </Link>
+        <Link to="/" className="navbar__logo">
+          <Lightbulb size={20} className="inline-block mr-1" /> IdeaValidator
+        </Link>
 
         {setSearchQuery !== undefined && (
           <div className="navbar__search">

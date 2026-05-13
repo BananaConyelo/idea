@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ThumbsUp, ThumbsDown, Eye, MessageCircle, Lock, Edit2, Trash2, Send } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Eye, MessageCircle, Lock, Edit2, Trash2, Send, Lightbulb } from 'lucide-react';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
 
@@ -236,7 +236,7 @@ export default function IdeaDetailPage() {
                 <ul>{swot.weaknesses.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
               <div className="swot-card swot-card--o">
-                <div className="swot-card__label">🚀 Opportunities</div>
+                <div className="swot-card__label"><Lightbulb size={16} className="inline-block mr-1" /> Opportunities</div>
                 <ul>{swot.opportunities.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
               <div className="swot-card swot-card--t">
