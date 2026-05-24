@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Lightbulb } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import api from '../api';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -23,11 +25,28 @@ export default function LoginPage() {
     }
   };
 
+  const handleResetSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setResetSent(false);
+    if (!forgotEmail) {
+      setError('Please enter your email address to reset your password.');
+      return;
+    }
+
+    try {
+      await api.post('/auth/password-reset/', { email: forgotEmail });
+      setResetSent(true);
+    } catch (err) {
+      setError(err.response?.data?.email?.[0] || 'Unable to send reset email. Please try again.');
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-card__logo">
-          <div className="auth-card__logo-icon">🚀</div>
+          <div className="auth-card__logo-icon"><Lightbulb size={28} /></div>
           <h1>Welcome back</h1>
           <p>Sign in to your IdeaValidator account</p>
         </div>
@@ -60,6 +79,14 @@ export default function LoginPage() {
           </div>
           <button id="login-submit" type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+          <button
+            type="button"
+            className="btn btn-link"
+            style={{ marginTop: '12px', width: '100%', textAlign: 'center' }}
+            onClick={() => navigate('/reset-password')}
+          >
+            Forgot password?
           </button>
         </form>
 

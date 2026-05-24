@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../api';
 import IdeaCard from '../components/IdeaCard';
 import { useAuth } from '../context/AuthContext';
-import { Flame, Clock, TrendingUp, Star } from 'lucide-react';
+import { Flame, Clock, TrendingUp, Star, Lightbulb } from 'lucide-react';
 
 const CATEGORIES = ['all','tech','health','finance','education','environment','social','entertainment','ecommerce','other'];
 const SORTS = [
@@ -64,7 +64,7 @@ export default function HomePage({ searchQuery }) {
       {/* Hero */}
       {!user && (
         <section className="hero">
-          <div className="hero__tag">🚀 The Platform for Startup Ideas</div>
+          <div className="hero__tag"><Lightbulb size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />The Platform for Startup Ideas</div>
           <h1 className="hero__title">Validate Your Startup Idea with the Community</h1>
           <p className="hero__sub">Submit ideas, get votes and feedback, discover trending innovations, and see AI-powered SWOT analysis.</p>
           <div className="hero__actions">

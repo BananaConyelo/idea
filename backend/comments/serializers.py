@@ -10,7 +10,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'user', 'idea', 'parent', 'content', 'replies', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'user', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'user', 'idea', 'created_at', 'updated_at']
 
     def get_replies(self, obj):
         if obj.replies.exists():

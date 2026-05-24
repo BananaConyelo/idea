@@ -1,29 +1,60 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
+import { useAuth } from '../context/AuthContext';
 import { Lightbulb, Lock, Unlock } from 'lucide-react';
 
 const CATEGORIES = ['tech','health','finance','education','environment','social','entertainment','ecommerce','other'];
 
-export default function SubmitIdeaPage() {
+export default function EditIdeaPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [form, setForm] = useState({ title: '', description: '', category: 'tech', is_public: true });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const fetchIdea = async () => {
+      try {
+        const { data } = await api.get(`/ideas/${id}/`);
+        if (data.owner?.username !== user?.username) {
+          navigate(`/ideas/${id}`, { replace: true });
+          return;
+        }
+        setForm({
+          title: data.title || '',
+          description: data.description || '',
+          category: data.category || 'tech',
+          is_public: data.is_public ?? true,
+        });
+      } catch (err) {
+        navigate('/', { replace: true });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchIdea();
+  }, [id, navigate, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    setLoading(true);
+    setSubmitting(true);
+
     try {
-      const { data } = await api.post('/ideas/', form);
-      navigate(`/ideas/${data.id}`);
+      await api.patch(`/ideas/${id}/`, form);
+      navigate(`/ideas/${id}`);
     } catch (err) {
       setErrors(err.response?.data || {});
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
+
+  if (loading) return <div className="loading-page"><div className="spinner" /></div>;
 
   return (
     <div className="page">
@@ -31,9 +62,9 @@ export default function SubmitIdeaPage() {
         <div style={{ marginBottom: '28px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
             <Lightbulb size={24} color="var(--accent-light)" />
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 900 }}>Submit Your Idea</h1>
+            <h1 style={{ fontSize: '1.75rem', fontWeight: 900 }}>Edit Idea</h1>
           </div>
-          <p style={{ color: 'var(--text-secondary)' }}>Share your startup idea with the community and get valuable feedback.</p>
+          <p style={{ color: 'var(--text-secondary)' }}>Update your idea and save your changes to the community.</p>
         </div>
 
         <div className="card">
@@ -106,10 +137,12 @@ export default function SubmitIdeaPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '12px' }}>
-              <button id="submit-idea-final" type="submit" className="btn btn-primary" disabled={loading} style={{ flex: 1 }}>
-                {loading ? 'Submitting...' : <><Lightbulb size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} />Submit Idea</>}
+              <button id="edit-idea-submit" type="submit" className="btn btn-primary" disabled={submitting} style={{ flex: 1 }}>
+                {submitting ? 'Saving...' : 'Save Changes'}
               </button>
-              <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Cancel</button>
+              <button type="button" className="btn btn-secondary" onClick={() => navigate(`/ideas/${id}`)}>
+                Cancel
+              </button>
             </div>
           </form>
         </div>

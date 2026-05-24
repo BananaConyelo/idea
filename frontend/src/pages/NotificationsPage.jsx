@@ -26,7 +26,17 @@ export default function NotificationsPage() {
     navigate(`/ideas/${n.idea}`);
   };
 
-  const VERB_ICONS = { commented: '💬', voted: '👍', replied: '↩️' };
+  const VERB_ICONS = { commented: '💬', replied: '↩️' };
+
+  const getNotificationIcon = (n) => {
+    if (n.verb === 'voted') return n.vote_type === 'down' ? '👎' : '👍';
+    return VERB_ICONS[n.verb] ?? '🔔';
+  };
+
+  const getNotificationText = (n) => {
+    if (n.verb === 'voted') return n.vote_type === 'down' ? 'disliked' : 'liked';
+    return n.verb;
+  };
 
   return (
     <div className="page">
@@ -58,7 +68,7 @@ export default function NotificationsPage() {
                 <div className={`notif-dot ${n.is_read ? 'read' : ''}`} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '0.875rem', fontWeight: n.is_read ? 400 : 600 }}>
-                    {VERB_ICONS[n.verb]} <strong>@{n.sender?.username}</strong> {n.verb} on <strong>"{n.idea_title}"</strong>
+                    {getNotificationIcon(n)} <strong>@{n.sender?.username}</strong> {getNotificationText(n)} on <strong>"{n.idea_title}"</strong>
                   </div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                     {new Date(n.created_at).toLocaleString()}

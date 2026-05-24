@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { Search, Bell, PlusCircle, LogOut, User, BarChart2, Menu, X } from 'lucide-react';
 import api from '../api';
+import { Lightbulb } from 'lucide-react';
+
 
 export default function Navbar({ searchQuery, setSearchQuery }) {
   const { user, logout } = useAuth();
@@ -29,7 +31,7 @@ export default function Navbar({ searchQuery, setSearchQuery }) {
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-        <Link to="/" className="navbar__logo"> IdeaValidator </Link>
+        <Link to="/" className="navbar__logo"><Lightbulb size={28} /> IdeaValidator </Link>
 
         {setSearchQuery !== undefined && (
           <div className="navbar__search">

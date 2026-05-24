@@ -109,7 +109,8 @@ class VoteView(APIView):
                 recipient=idea.owner,
                 sender=request.user,
                 idea=idea,
-                verb='voted'
+                verb='voted',
+                vote_type=vote_type
             )
 
         serializer = IdeaSerializer(idea, context={'request': request})

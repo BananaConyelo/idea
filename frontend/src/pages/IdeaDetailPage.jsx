@@ -236,7 +236,7 @@ export default function IdeaDetailPage() {
                 <ul>{swot.weaknesses.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
               <div className="swot-card swot-card--o">
-                <div className="swot-card__label">🚀 Opportunities</div>
+                <div className="swot-card__label"><Lightbulb size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} />Opportunities</div>
                 <ul>{swot.opportunities.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
               <div className="swot-card swot-card--t">

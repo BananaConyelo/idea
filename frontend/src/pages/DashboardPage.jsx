@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { BarChart2, Trophy, TrendingUp } from 'lucide-react';
+import { BarChart2, Trophy, TrendingUp, Lightbulb } from 'lucide-react';
 
 const COLORS = ['#6366f1','#10b981','#f59e0b','#ef4444','#3b82f6','#ec4899','#f97316','#8b5cf6','#22c55e'];
 
@@ -75,7 +75,7 @@ export default function DashboardPage() {
               { label: 'Total Users', value: stats.total_users, icon: '👥', color: 'var(--success)' },
               { label: 'Total Votes', value: stats.total_votes, icon: '👍', color: 'var(--warning)' },
               { label: 'Total Comments', value: stats.total_comments, icon: '💬', color: 'var(--info)' },
-              { label: 'My Ideas', value: myIdeas.length, icon: '🚀', color: '#a78bfa' },
+              { label: 'My Ideas', value: myIdeas.length, icon: <Lightbulb size={28} />, color: '#a78bfa' },
               { label: 'My Total Votes', value: myIdeas.reduce((a, i) => a + i.upvote_count, 0), icon: '⭐', color: '#f472b6' },
             ].map(s => (
               <div key={s.label} className="chart-container" style={{ padding: '20px' }}>
