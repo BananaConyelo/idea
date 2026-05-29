@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ThumbsUp, ThumbsDown, Eye, MessageCircle, Lock, Edit2, Trash2, Send } from 'lucide-react';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
+import { Lightbulb } from 'lucide-react';
 
 function generateSWOT(idea) {
   const cat = idea.category;
